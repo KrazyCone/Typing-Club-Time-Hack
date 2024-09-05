@@ -1,0 +1,31 @@
+
+#Persistent
+SetTitleMatchMode, 2
+
+Gui, Add, Edit, vUserInput w50 h20, ; Add an input box to the GUI for one letter/number
+Gui, Add, Button, x+10 gStartLoop, Start ; Add a button to start the typing loop
+Gui, Add, Button, x+10 gStopLoop, Stop ; Add a button to stop the typing loop
+Gui, Show, w250 h100, Repeater
+return
+
+StartLoop:
+Gui, Submit, NoHide ; Submit the input without hiding the GUI
+Loop {
+    ; Check if StopLoop flag is set
+    if (stopFlag) {
+        stopFlag := false
+        break
+    }
+    Send, %UserInput% ; Send the user input
+    Sleep, 200 ; Adjust speed of typing
+    Send, {Backspace} ; Delete the typed character
+    Sleep, 200 ; Adjust speed of deleting
+}
+return
+
+StopLoop:
+stopFlag := true ; Set the StopLoop flag
+return
+
+GuiClose:
+ExitApp

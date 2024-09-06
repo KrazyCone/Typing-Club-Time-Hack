@@ -1,12 +1,18 @@
-
 #Persistent
 SetTitleMatchMode, 2
 
-Gui, Add, Edit, vUserInput w50 h20, ; Add an input box to the GUI for one letter/number
-Gui, Add, Button, x+10 gStartLoop, Start ; Add a button to start the typing loop
-Gui, Add, Button, x+10 gStopLoop, Stop ; Add a button to stop the typing loop
-Gui, Show, w250 h100, Repeater
+; Create a cleaner and more organized GUI layout
+Gui, Font, s10, Segoe UI ; Set font for a modern look
+Gui, Add, Text, xm y10, Enter a character to repeat:
+Gui, Add, Edit, vUserInput w50 h20 Center xm, ; Add an input box to the GUI for one letter/number
+Gui, Add, Button, xm y+10 w100 gStartLoop, Start (F1) ; Add a button to start the typing loop
+Gui, Add, Button, x+10 w100 gStopLoop, Stop (F2) ; Add a button to stop the typing loop, aligned with the Start button
+Gui, Show, AutoSize Center, Repeater ; Automatically size the window and center it
 return
+
+; Hotkeys for Start and Stop
+F1::Gosub, StartLoop
+F2::Gosub, StopLoop
 
 StartLoop:
 Gui, Submit, NoHide ; Submit the input without hiding the GUI
